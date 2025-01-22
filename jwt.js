@@ -6,7 +6,6 @@ function generateToken(payload) {
   return jwt.sign(payload, process.env.JWT_SECRET);
 }
 
-//console.log("process.env.JWT_SECRET", process.env.JWT_SECRET);
 const payload = { lesson: "cloudinaryUpload" };
 const token = generateToken(payload);
 console.log("Generated Token:", token);

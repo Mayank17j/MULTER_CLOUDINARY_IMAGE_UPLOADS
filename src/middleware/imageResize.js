@@ -6,6 +6,8 @@ const path = require("path");
 const deserialize = require("v8");
 
 const imageResize = async (req, res, next) => {
+  console.log("LOG.imageResize.START");
+
   //original file path, original file path
   try {
     const originalFilePath = req.files[0].path;
@@ -31,8 +33,11 @@ const imageResize = async (req, res, next) => {
     req.files[0].path = outputFilePath;
     req.originalFilePath = originalFilePath;
   } catch (error) {
+    console.log("LOG.imageResize.500");
+
     return res.status(500).json({ error: { description: error.message } });
   }
+  console.log("LOG.imageResize.End");
 }; //resized image will saved in upload folder
 
-module.exports = imageResize;
+module.exports = { imageResize };

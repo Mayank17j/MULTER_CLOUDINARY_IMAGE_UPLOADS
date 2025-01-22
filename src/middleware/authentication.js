@@ -1,5 +1,5 @@
 //to create JWT token create, require JSON-web-token
-const { jwt } = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const authenticateJWT = (req, res, next) => {
@@ -12,13 +12,9 @@ const authenticateJWT = (req, res, next) => {
       .status(403)
       .json({ message: "No token provides, authorisation denied" });
 
-  //token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsZXNzb24iOiJjbG91ZGluYXJ5VXBsb2FkIiwiaWF0IjoxNzM3NDM0NTY3fQ.ZoDJ0dd6hQqDcVvaPfBTRjYe4O-Cv827yYlwP_StM-0";
-  console.log("LOG.token=", token);
-  console.log("LOG.process.env.JWT_SECRET=", process.env.JWT_SECRET);
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("LOG.decoded=", decoded);
+    console.log("LOG. authentication.decoded.SUCCESSFUL=", decoded);
 
     req.user = decoded;
     next();
